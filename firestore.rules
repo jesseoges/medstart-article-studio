@@ -3,7 +3,7 @@ service cloud.firestore {
   match /databases/{database}/documents {
     // Replace the placeholder with the administrator UID from Firebase Authentication.
     function isAdmin() {
-      return request.auth != null && request.auth.uid == "REPLACE_WITH_ADMIN_UID";
+      return request.auth != null && request.auth.uid == "5mtj86b2YSgSfWEGPZNNmUVdioj1";
     }
     match /articles/{articleId} {
       // Anyone may read published articles only; drafts are private.
