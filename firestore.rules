@@ -4,7 +4,7 @@ service cloud.firestore {
 
     function isAdmin() {
       return request.auth != null 
-          && request.auth.uid == "PASTE_YOUR_CORRECT_UID_HERE";
+          && request.auth.uid == "5mtj86b2YSgSfWEGPZNNmUVdioj1";
     }
 
     match /articles/{articleId} {
