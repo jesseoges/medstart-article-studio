@@ -1,17 +1,21 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Replace the placeholder with the administrator UID from Firebase Authentication.
+
     function isAdmin() {
-      return request.auth != null && request.auth.uid == "5mtj86b2YSgSfWEGPZNNmUVdioj1";
+      return request.auth != null 
+          && request.auth.uid == "PASTE_YOUR_CORRECT_UID_HERE";
     }
+
     match /articles/{articleId} {
-      // Anyone may read published articles only; drafts are private.
-      allow get, list: if (resource.data.published == true || isAdmin());
+      allow read: if isAdmin() || (resource != null && resource.data.published == true);
       allow create: if isAdmin() && request.resource.data.updatedBy == request.auth.uid;
       allow update: if isAdmin() && request.resource.data.updatedBy == request.auth.uid;
       allow delete: if isAdmin();
     }
-    // No client access to other collections unless separately and deliberately configured.
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
   }
 }
